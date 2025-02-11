@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "YxUu1iM94Qk=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rpontes\\Documents\\ThiagoDotnet\\MultiScreenApp\\MultiScreenApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rpontes\\.nuget\\packages\\aspose.slides.net\\25.2.0\\aspose.slides.net.25.2.0.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\documentformat.openxml\\3.2.0\\documentformat.openxml.3.2.0.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\documentformat.openxml.framework\\3.2.0\\documentformat.openxml.framework.3.2.0.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.1\\microsoft.win32.systemevents.9.0.1.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\system.drawing.common\\9.0.1\\system.drawing.common.9.0.1.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\system.io.packaging\\8.0.1\\system.io.packaging.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
