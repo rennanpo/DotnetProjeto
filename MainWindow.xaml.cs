@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MultiScreenApp
 {
@@ -15,23 +16,43 @@ namespace MultiScreenApp
             InitializeComponent();
             isPlaying = true;
             displayWindow = new DisplayWindow();
+
+            // Abrir a DisplayWindow na tela secundária, se disponível
+            var allScreens = System.Windows.Forms.Screen.AllScreens;
+            if (allScreens.Length > 1)
+            {
+                var secondaryScreen = allScreens[1];
+                displayWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                displayWindow.Left = secondaryScreen.WorkingArea.Left;
+                displayWindow.Top = secondaryScreen.WorkingArea.Top;
+                displayWindow.Width = secondaryScreen.WorkingArea.Width;
+                displayWindow.Height = secondaryScreen.WorkingArea.Height;
+                displayWindow.WindowState = WindowState.Maximized;
+            }
+
             displayWindow.Show();
+
+            // Adicionando o evento Closed para fechar a DisplayWindow
+            this.Closed += (s, e) => displayWindow.Close();
         }
 
         private void ChooseFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Video files (*.mp4)|*.mp4|PowerPoint files (*.pptx)|*.pptx";
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            //openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|Video files (*.mp4)|*.mp4|PowerPoint files (*.pptx)|*.pptx";
             openFileDialog.Multiselect = true; // Permitir seleção de múltiplos arquivos
-            PreviousButton.Visibility = Visibility.Collapsed; 
+            PreviousButton.Visibility = Visibility.Collapsed;
             NextButton.Visibility = Visibility.Collapsed;
             PauseButton.Visibility = Visibility.Collapsed;
+            CloseButton.Visibility = Visibility.Collapsed;
+            hubimg.Visibility = Visibility.Collapsed;
 
             if (openFileDialog.ShowDialog() == true)
             {
-                if (openFileDialog.FileNames.Length == 1)
+                var filePaths = openFileDialog.FileNames;
+                if (filePaths.Length == 1)
                 {
-                    var filePath = openFileDialog.FileNames[0];
+                    var filePath = filePaths[0];
                     if (filePath.EndsWith(".png") || filePath.EndsWith(".jpg") || filePath.EndsWith(".jpeg"))
                     {
                         displayWindow.DisplayImage(filePath);
@@ -46,15 +67,22 @@ namespace MultiScreenApp
                         displayWindow.LoadPresentation(filePath);
                         PreviousButton.Visibility = Visibility.Visible; // Mostra os botões de navegação
                         NextButton.Visibility = Visibility.Visible; // Mostra os botões de navegação
+                        CloseButton.Visibility = Visibility.Visible; // Mostra o botão fechar
                     }
                 }
-                else if (openFileDialog.FileNames.Length == 2)
+                else if (filePaths.Length == 2)
                 {
-                    var filePath1 = openFileDialog.FileNames[0];
-                    var filePath2 = openFileDialog.FileNames[1];
+                    var filePath1 = filePaths[0];
+                    var filePath2 = filePaths[1];
                     if ((filePath1.EndsWith(".png") || filePath1.EndsWith(".jpg") || filePath1.EndsWith(".jpeg")) && (filePath2.EndsWith(".png") || filePath2.EndsWith(".jpg") || filePath2.EndsWith(".jpeg")))
                     {
+                        hubimg.Visibility = Visibility.Visible;
+                        // Passar as duas imagens para a DisplayWindow
                         displayWindow.DisplayImages(filePath1, filePath2);
+                    }
+                    else if (filePath1.EndsWith(".mp4"))
+                    {
+
                     }
                     else
                     {
@@ -75,7 +103,7 @@ namespace MultiScreenApp
                 if (isPlaying)
                 {
                     displayWindow.PauseVideo();
-                    PauseButton.Content = "Play";
+                    PauseButton.Content = "Play ";
                 }
                 else
                 {
@@ -102,6 +130,41 @@ namespace MultiScreenApp
                 displayWindow.CurrentSlideIndex++;
                 displayWindow.ShowSlide(displayWindow.CurrentSlideIndex);
             }
+        }
+
+        private void ClosePresentationButton_Click(object sender, RoutedEventArgs e)
+        {
+            displayWindow.ClosePresentation(); // Chama o método para fechar a apresentação na DisplayWindow
+        }
+
+        // Novo método para alterar a imagem da esquerda
+        private void ChangeLeftImage_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                displayWindow.UpdateLeftImage(filePath);
+            }
+        }
+
+        // Novo método para alterar a imagem da direita
+        private void ChangeRightImage_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                displayWindow.UpdateRightImage(filePath);
+            }
+        }
+
+        // Novo método para trocar as imagens
+        private void SwapImages_Click(object sender, RoutedEventArgs e)
+        {
+            displayWindow.SwapImagePositions();
         }
     }
 }

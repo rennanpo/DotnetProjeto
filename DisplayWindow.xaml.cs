@@ -1,30 +1,43 @@
-using Aspose.Slides;
-using System;
-using System.Collections.Generic;
+using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.Office.Core;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls; // Adicionar esta linha
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Application = Microsoft.Office.Interop.PowerPoint.Application;
+using System.Runtime.InteropServices;
 
 namespace MultiScreenApp
 {
     public partial class DisplayWindow : Window
     {
-        private bool isFullScreen = false;
-        private WindowState previousWindowState;
-        private double previousWindowHeight;
-        private double previousWindowWidth;
-
+        private bool isFullScreen = true;
         public List<BitmapImage> SlideImages { get; private set; }
         public int CurrentSlideIndex { get; set; }
+
+        private Application pptApp; // Aplicativo PowerPoint
+        private Presentation pptPresentation; // Apresentação atual
 
         public DisplayWindow()
         {
             InitializeComponent();
             SlideImages = new List<BitmapImage>();
-            CurrentSlideIndex = -1;
+            CurrentSlideIndex = 0;
             this.SizeChanged += DisplayWindow_SizeChanged;
+            InitializePowerPoint(); // Inicializando o PowerPoint
+        }
+        private void InitializePowerPoint()
+        {
+            try
+            {
+                pptApp = new Application();
+                pptApp.Visible = MsoTriState.msoFalse; // PowerPoint invisível
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Erro ao inicializar o PowerPoint: " + ex.Message);
+            }
         }
 
         private void DisplayWindow_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -58,7 +71,7 @@ namespace MultiScreenApp
             DisplayedVideo.Visibility = Visibility.Collapsed;
             DisplayedImage1.Source = new BitmapImage(new Uri(filePath1));
             DisplayedImage1.Visibility = Visibility.Visible;
-            Grid.SetColumnSpan(DisplayedImage1, 1); // Certifique-se de definir isso corretamente
+            Grid.SetColumnSpan(DisplayedImage1, 1);
             DisplayedImage2.Source = new BitmapImage(new Uri(filePath2));
             DisplayedImage2.Visibility = Visibility.Visible;
             AdjustContentSize();
@@ -69,7 +82,7 @@ namespace MultiScreenApp
             DisplayedVideo.Visibility = Visibility.Collapsed;
             DisplayedImage1.Source = new BitmapImage(new Uri(filePath));
             DisplayedImage1.Visibility = Visibility.Visible;
-            Grid.SetColumnSpan(DisplayedImage1, 2); // Certifique-se de definir isso corretamente
+            Grid.SetColumnSpan(DisplayedImage1, 2);
             DisplayedImage2.Visibility = Visibility.Collapsed;
             AdjustContentSize();
         }
@@ -88,38 +101,97 @@ namespace MultiScreenApp
         {
             try
             {
+                // Fechar apresentação anterior e liberar recursos
+                ClosePresentation();
+
+                // Recriando uma nova instância do PowerPoint
+                InitializePowerPoint();
+
+                // Abre a nova apresentação
+                var pptPresentations = pptApp.Presentations;
+                pptPresentation = pptPresentations.Open(filePath);
+
+                // Converte os slides da apresentação em imagens
                 SlideImages.Clear();
-                using (var presentation = new Presentation(filePath))
+                foreach (Slide slide in pptPresentation.Slides)
                 {
-                    foreach (var slide in presentation.Slides)
+                    BitmapImage slideImage = ConvertSlideToImage(slide);
+                    if (slideImage != null)
                     {
-                        SlideImages.Add(ConvertSlideToImage(slide));
+                        SlideImages.Add(slideImage);
                     }
                 }
+
+                // Exibe o primeiro slide
                 if (SlideImages.Count > 0)
                 {
-                    CurrentSlideIndex = 0;
-                    ShowSlide(CurrentSlideIndex);
+                    DisplayedImage1.Source = SlideImages[0];
+                    DisplayedImage1.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar a apresentação: " + ex.Message);
+                //MessageBox.Show("Erro ao carregar a apresentação: " + ex.Message);
             }
         }
 
-        private BitmapImage ConvertSlideToImage(ISlide slide)
+        private BitmapImage ConvertSlideToImage(Slide slide)
         {
-            using (var stream = new MemoryStream())
+            try
             {
-                slide.GetThumbnail(1.0f, 1.0f).Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                stream.Position = 0;
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = stream;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                return bitmapImage;
+                string tempPath = Path.Combine(Path.GetTempPath(), $"slide_{slide.SlideIndex}.png");
+
+                // Exportando o slide como imagem PNG
+                slide.Export(tempPath, "PNG", 960, 540);
+
+                if (File.Exists(tempPath))
+                {
+                    var bitmapImage = new BitmapImage(new Uri(tempPath));
+                    return bitmapImage;
+                }
+                else
+                {
+                    throw new Exception($"Falha ao exportar o slide {slide.SlideIndex}.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao converter o slide: {ex.Message}");
+                return null;
+            }
+        }
+
+
+
+        // Método para fechar a apresentação atual
+        public void ClosePresentation()
+        {
+            try
+            {
+                if (pptPresentation != null)
+                {
+                    // Fechar apresentação
+                    pptPresentation.Close();
+                    Marshal.ReleaseComObject(pptPresentation); // Libera o objeto COM
+                    pptPresentation = null;
+
+                    // Fechar o aplicativo PowerPoint
+                    if (pptApp != null)
+                    {
+                        pptApp.Quit(); // Fecha o PowerPoint
+                        Marshal.ReleaseComObject(pptApp); // Libera o objeto COM do PowerPoint
+                        pptApp = null;
+                    }
+
+                    // Esconde a imagem exibida e volta a tela preta
+                    DisplayedImage1.Visibility = Visibility.Collapsed;
+                    DisplayedVideo.Visibility = Visibility.Collapsed;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao fechar a apresentação: " + ex.Message);
             }
         }
 
@@ -131,7 +203,7 @@ namespace MultiScreenApp
                 DisplayedImage1.Source = SlideImages[index];
                 DisplayedImage1.Visibility = Visibility.Visible;
                 DisplayedImage2.Visibility = Visibility.Collapsed;
-                Grid.SetColumnSpan(DisplayedImage1, 2); // Certifique-se de definir isso corretamente
+                Grid.SetColumnSpan(DisplayedImage1, 2);
                 AdjustContentSize();
             }
         }
@@ -148,7 +220,7 @@ namespace MultiScreenApp
 
         private void DisplayedVideo_MediaEnded(object sender, RoutedEventArgs e)
         {
-            DisplayedVideo.Position = TimeSpan.Zero; // Reinicia o vídeo
+            DisplayedVideo.Position = TimeSpan.Zero;
             DisplayedVideo.Play();
         }
 
@@ -164,28 +236,72 @@ namespace MultiScreenApp
 
         private void ToggleFullScreen()
         {
-            if (!isFullScreen)
+            try
             {
-                previousWindowState = this.WindowState;
-                previousWindowHeight = this.Height;
-                previousWindowWidth = this.Width;
-                this.WindowState = WindowState.Normal;
-                this.WindowStyle = WindowStyle.None;
-                this.ResizeMode = ResizeMode.NoResize;
-                this.Topmost = true;
-                this.WindowState = WindowState.Maximized;
-                isFullScreen = true;
+                if (!isFullScreen)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.ResizeMode = ResizeMode.NoResize;
+                    this.Top = 0;
+                    this.Left = 0;
+                    this.Width = SystemParameters.PrimaryScreenWidth;
+                    this.Height = SystemParameters.PrimaryScreenHeight;
+                    this.WindowState = WindowState.Maximized;
+                    isFullScreen = true;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.ResizeMode = ResizeMode.CanResize;
+                    this.Width = 800;
+                    this.Height = 600;
+                    this.Top = (SystemParameters.PrimaryScreenHeight - this.Height) / 2;
+                    this.Left = (SystemParameters.PrimaryScreenWidth - this.Width) / 2;
+                    isFullScreen = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.Topmost = false;
-                this.WindowState = previousWindowState;
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.ResizeMode = ResizeMode.CanResize;
-                this.Height = previousWindowHeight;
-                this.Width = previousWindowWidth;
-                isFullScreen = false;
+                MessageBox.Show("Erro ao alternar entre tela cheia e modo janela: " + ex.Message);
             }
         }
+
+        public void UpdateLeftImage(string filePath)
+        {
+            if (DisplayedImage1 != null)
+            {
+                DisplayedImage1.Source = new BitmapImage(new Uri(filePath));
+                DisplayedImage1.Visibility = Visibility.Visible;  // Torna a imagem visível
+            }
+        }
+
+        // Método para atualizar a imagem da direita
+        public void UpdateRightImage(string filePath)
+        {
+            if (DisplayedImage2 != null)
+            {
+                DisplayedImage2.Source = new BitmapImage(new Uri(filePath));
+                DisplayedImage2.Visibility = Visibility.Visible;  // Torna a imagem visível
+            }
+        }
+
+        // Método para trocar as imagens de posição
+        public void SwapImagePositions()
+        {
+            if (DisplayedImage1 != null && DisplayedImage2 != null)
+            {
+                var temp = DisplayedImage1.Source;
+                DisplayedImage1.Source = DisplayedImage2.Source;
+                DisplayedImage2.Source = temp;
+            }
+        }
+
+        // Método para esconder as imagens
+        public void HideImages()
+        {
+            DisplayedImage1.Visibility = Visibility.Collapsed;
+            DisplayedImage2.Visibility = Visibility.Collapsed;
+        }
+
     }
 }
