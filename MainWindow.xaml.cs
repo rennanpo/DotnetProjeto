@@ -72,21 +72,44 @@ namespace MultiScreenApp
                 }
                 else if (filePaths.Length == 2)
                 {
-                    var filePath1 = filePaths[0];
-                    var filePath2 = filePaths[1];
-                    if ((filePath1.EndsWith(".png") || filePath1.EndsWith(".jpg") || filePath1.EndsWith(".jpeg")) && (filePath2.EndsWith(".png") || filePath2.EndsWith(".jpg") || filePath2.EndsWith(".jpeg")))
-                    {
-                        hubimg.Visibility = Visibility.Visible;
-                        // Passar as duas imagens para a DisplayWindow
-                        displayWindow.DisplayImages(filePath1, filePath2);
-                    }
-                    else if (filePath1.EndsWith(".mp4"))
-                    {
+                    string imagePath = null;
+                    string videoPath = null;
 
+                    // Verifica os tipos de arquivos selecionados
+                    foreach (var filePath in filePaths)
+                    {
+                        if (filePath.EndsWith(".png") || filePath.EndsWith(".jpg") || filePath.EndsWith(".jpeg"))
+                        {
+                            imagePath = filePath;
+                        }
+                        else if (filePath.EndsWith(".mp4"))
+                        {
+                            SwapButton.Visibility = Visibility.Visible;
+                            PauseButton.Visibility = Visibility.Visible;
+                            videoPath = filePath;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Por favor, selecione apenas imagens e vídeos.");
+                            return;
+                        }
+                    }
+
+                    // Exibe dois arquivos de imagem
+                    if (imagePath != null && videoPath == null)
+                    {
+                        displayWindow.DisplayImages(filePaths[0], filePaths[1]);
+                        hubimg.Visibility = Visibility.Visible; // Exibe a área para imagens lado a lado
+                    }
+                    // Exibe uma imagem e um vídeo
+                    else if (imagePath != null && videoPath != null)
+                    {
+                        displayWindow.DisplayImageAndVideo(imagePath, videoPath);
+                        PauseButton.Visibility = Visibility.Visible; // Mostra o botão de pausa para o vídeo
                     }
                     else
                     {
-                        MessageBox.Show("Por favor, selecione duas imagens para exibição lado a lado.");
+                        MessageBox.Show("Selecione uma imagem e um vídeo, ou duas imagens.");
                     }
                 }
                 else
@@ -166,5 +189,11 @@ namespace MultiScreenApp
         {
             displayWindow.SwapImagePositions();
         }
+
+        private void SwapButton_Click(object sender, RoutedEventArgs e)
+        {
+            displayWindow.SwapImageAndVideo();
+        }
+
     }
 }

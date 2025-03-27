@@ -24,7 +24,10 @@
         </Grid.ColumnDefinitions>
         <Image Name="DisplayedImage1" Visibility="Collapsed" Grid.Column="0" />
         <Image Name="DisplayedImage2" Visibility="Collapsed" Grid.Column="1" />
-        <MediaElement Name="DisplayedVideo" Visibility="Collapsed" MediaEnded="DisplayedVideo_MediaEnded" LoadedBehavior="Manual" UnloadedBehavior="Stop" Grid.ColumnSpan="2"/>
+        <MediaElement Name="DisplayedVideo" Visibility="Collapsed"
+              MediaEnded="DisplayedVideo_MediaEnded"
+              LoadedBehavior="Manual" UnloadedBehavior="Stop"
+              Grid.Column="1"/>
         <WebBrowser Name="DisplayedBrowser" Visibility="Collapsed" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

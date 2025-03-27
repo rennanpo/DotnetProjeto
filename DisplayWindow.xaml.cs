@@ -87,6 +87,41 @@ namespace MultiScreenApp
             AdjustContentSize();
         }
 
+        public void DisplayImageAndVideo(string imagePath, string videoPath)
+        {
+            // Esconda outras visualizações
+            DisplayedImage1.Visibility = Visibility.Visible;
+            DisplayedImage2.Visibility = Visibility.Collapsed;
+            DisplayedVideo.Visibility = Visibility.Visible;
+
+            // Defina a imagem e o vídeo
+            DisplayedImage1.Source = new BitmapImage(new Uri(imagePath));
+            DisplayedVideo.Source = new Uri(videoPath);
+
+            // Ajuste o tamanho da imagem e do vídeo para que ambos se ajustem lado a lado
+            AdjustContentSizeForImageAndVideo();
+
+            // Comece a reproduzir o vídeo
+            DisplayedVideo.Play();
+        }
+
+        private void AdjustContentSizeForImageAndVideo()
+        {
+            double windowWidth = this.ActualWidth;
+            double windowHeight = this.ActualHeight;
+
+            if (DisplayedImage1.Visibility == Visibility.Visible && DisplayedVideo.Visibility == Visibility.Visible)
+            {
+                DisplayedImage1.Width = windowWidth / 2;
+                DisplayedImage1.Height = windowHeight;
+
+                DisplayedVideo.Width = windowWidth / 2;
+                DisplayedVideo.Height = windowHeight;
+            }
+        }
+
+
+
         public void LoadVideo(string filePath)
         {
             DisplayedImage1.Visibility = Visibility.Collapsed;
@@ -303,5 +338,21 @@ namespace MultiScreenApp
             DisplayedImage2.Visibility = Visibility.Collapsed;
         }
 
+        public void SwapImageAndVideo()
+        {
+            if (DisplayedImage1.Visibility == Visibility.Visible && DisplayedVideo.Visibility == Visibility.Visible)
+            {
+                int imageColumn = Grid.GetColumn(DisplayedImage1);
+                int videoColumn = Grid.GetColumn(DisplayedVideo);
+
+                // Troca os elementos de coluna
+                Grid.SetColumn(DisplayedImage1, videoColumn);
+                Grid.SetColumn(DisplayedVideo, imageColumn);
+            }
+        }
+
+
     }
 }
+
+
