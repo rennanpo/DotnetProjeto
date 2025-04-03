@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Application = Microsoft.Office.Interop.PowerPoint.Application;
 using System.Runtime.InteropServices;
+using DocumentFormat.OpenXml.Math;
 
 namespace MultiScreenApp
 {
@@ -89,12 +90,9 @@ namespace MultiScreenApp
             // Troca os elementos de coluna
             if (DisplayedVideo.Visibility == Visibility.Visible)
             {
-                int imageColumn = Grid.GetColumn(DisplayedImage1);
-                int videoColumn = Grid.GetColumn(DisplayedVideo);
-
-                // Troca os elementos de coluna
-                Grid.SetColumn(DisplayedImage1, videoColumn);
-                Grid.SetColumn(DisplayedVideo, imageColumn);
+                Grid.SetColumn(DisplayedImage1, 0);
+                Grid.SetColumn(DisplayedVideo, 2);
+                Grid.SetColumn(DisplayedImage2, 1);
             }
             DisplayedVideo.Visibility = Visibility.Collapsed;
             DisplayedImage1.Source = new BitmapImage(new Uri(filePath1));
