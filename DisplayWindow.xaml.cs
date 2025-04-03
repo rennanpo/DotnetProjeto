@@ -47,22 +47,40 @@ namespace MultiScreenApp
 
         private void AdjustContentSize()
         {
-            if (DisplayedVideo.Visibility == Visibility.Visible)
+            double windowWidth = this.ActualWidth;
+            double windowHeight = this.ActualHeight;
+
+            if (DisplayedVideo.Visibility == Visibility.Visible && DisplayedImage1.Visibility == Visibility.Visible)
             {
-                DisplayedVideo.Width = this.ActualWidth;
-                DisplayedVideo.Height = this.ActualHeight;
+                DisplayedImage1.Width = windowWidth / 2;
+                DisplayedImage1.Height = windowHeight;
+                DisplayedVideo.Width = windowWidth / 2;
+                DisplayedVideo.Height = windowHeight;
+                Grid.SetColumnSpan(DisplayedImage1, 1);
+                Grid.SetColumnSpan(DisplayedVideo, 1);
+                Grid.SetColumn(DisplayedImage1, 0);
+                Grid.SetColumn(DisplayedVideo, 1);
+            }
+            else if (DisplayedVideo.Visibility == Visibility.Visible)
+            {
+                DisplayedVideo.Width = windowWidth;
+                DisplayedVideo.Height = windowHeight;
+                Grid.SetColumnSpan(DisplayedVideo, 2);
+                Grid.SetColumn(DisplayedVideo, 0);
             }
             else if (DisplayedImage1.Visibility == Visibility.Visible && DisplayedImage2.Visibility == Visibility.Visible)
             {
-                DisplayedImage1.Width = this.ActualWidth / 2;
-                DisplayedImage1.Height = this.ActualHeight;
-                DisplayedImage2.Width = this.ActualWidth / 2;
-                DisplayedImage2.Height = this.ActualHeight;
+                DisplayedImage1.Width = windowWidth / 2;
+                DisplayedImage1.Height = windowHeight;
+                DisplayedImage2.Width = windowWidth / 2;
+                DisplayedImage2.Height = windowHeight;
             }
             else if (DisplayedImage1.Visibility == Visibility.Visible)
             {
-                DisplayedImage1.Width = this.ActualWidth;
-                DisplayedImage1.Height = this.ActualHeight;
+                DisplayedImage1.Width = windowWidth;
+                DisplayedImage1.Height = windowHeight;
+                Grid.SetColumnSpan(DisplayedImage1, 2);
+                Grid.SetColumn(DisplayedImage1, 0);
             }
         }
 
@@ -89,38 +107,13 @@ namespace MultiScreenApp
 
         public void DisplayImageAndVideo(string imagePath, string videoPath)
         {
-            // Esconda outras visualizações
             DisplayedImage1.Visibility = Visibility.Visible;
-            DisplayedImage2.Visibility = Visibility.Collapsed;
             DisplayedVideo.Visibility = Visibility.Visible;
-
-            // Defina a imagem e o vídeo
             DisplayedImage1.Source = new BitmapImage(new Uri(imagePath));
             DisplayedVideo.Source = new Uri(videoPath);
-
-            // Ajuste o tamanho da imagem e do vídeo para que ambos se ajustem lado a lado
-            AdjustContentSizeForImageAndVideo();
-
-            // Comece a reproduzir o vídeo
+            AdjustContentSize();
             DisplayedVideo.Play();
         }
-
-        private void AdjustContentSizeForImageAndVideo()
-        {
-            double windowWidth = this.ActualWidth;
-            double windowHeight = this.ActualHeight;
-
-            if (DisplayedImage1.Visibility == Visibility.Visible && DisplayedVideo.Visibility == Visibility.Visible)
-            {
-                DisplayedImage1.Width = windowWidth / 2;
-                DisplayedImage1.Height = windowHeight;
-
-                DisplayedVideo.Width = windowWidth / 2;
-                DisplayedVideo.Height = windowHeight;
-            }
-        }
-
-
 
         public void LoadVideo(string filePath)
         {
@@ -128,8 +121,8 @@ namespace MultiScreenApp
             DisplayedImage2.Visibility = Visibility.Collapsed;
             DisplayedVideo.Source = new Uri(filePath);
             DisplayedVideo.Visibility = Visibility.Visible;
-            DisplayedVideo.Play();
             AdjustContentSize();
+            DisplayedVideo.Play();
         }
 
         public void LoadPresentation(string filePath)
@@ -354,5 +347,3 @@ namespace MultiScreenApp
 
     }
 }
-
-

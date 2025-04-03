@@ -1,15 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "YxUu1iM94Qk=",
+  "dgSpecHash": "BMfT9Qx4aww=",
   "success": true,
-  "projectFilePath": "C:\\Users\\rpontes\\Documents\\ThiagoDotnet\\MultiScreenApp\\MultiScreenApp.csproj",
+  "projectFilePath": "C:\\Users\\rpontes\\Documents\\DotnetProjeto\\MultiScreenApp.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\rpontes\\.nuget\\packages\\aspose.slides.net\\25.2.0\\aspose.slides.net.25.2.0.nupkg.sha512",
     "C:\\Users\\rpontes\\.nuget\\packages\\documentformat.openxml\\3.2.0\\documentformat.openxml.3.2.0.nupkg.sha512",
     "C:\\Users\\rpontes\\.nuget\\packages\\documentformat.openxml.framework\\3.2.0\\documentformat.openxml.framework.3.2.0.nupkg.sha512",
-    "C:\\Users\\rpontes\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.1\\microsoft.win32.systemevents.9.0.1.nupkg.sha512",
-    "C:\\Users\\rpontes\\.nuget\\packages\\system.drawing.common\\9.0.1\\system.drawing.common.9.0.1.nupkg.sha512",
-    "C:\\Users\\rpontes\\.nuget\\packages\\system.io.packaging\\8.0.1\\system.io.packaging.8.0.1.nupkg.sha512"
+    "C:\\Users\\rpontes\\.nuget\\packages\\microsoft.office.interop.powerpoint\\15.0.4420.1018\\microsoft.office.interop.powerpoint.15.0.4420.1018.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\microsoftofficecore\\15.0.0\\microsoftofficecore.15.0.0.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\netoffice.core\\1.7.4.11\\netoffice.core.1.7.4.11.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\netoffice.powerpoint\\1.7.4.11\\netoffice.powerpoint.1.7.4.11.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\system.drawing.common\\9.0.2\\system.drawing.common.9.0.2.nupkg.sha512",
+    "C:\\Users\\rpontes\\.nuget\\packages\\system.windows.forms\\4.0.0\\system.windows.forms.4.0.0.nupkg.sha512"
   ],
   "logs": []
 }

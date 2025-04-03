@@ -46,6 +46,7 @@ namespace MultiScreenApp
             PauseButton.Visibility = Visibility.Collapsed;
             CloseButton.Visibility = Visibility.Collapsed;
             hubimg.Visibility = Visibility.Collapsed;
+            SwapButton.Visibility = Visibility.Collapsed;
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -84,8 +85,6 @@ namespace MultiScreenApp
                         }
                         else if (filePath.EndsWith(".mp4"))
                         {
-                            SwapButton.Visibility = Visibility.Visible;
-                            PauseButton.Visibility = Visibility.Visible;
                             videoPath = filePath;
                         }
                         else
@@ -105,7 +104,8 @@ namespace MultiScreenApp
                     else if (imagePath != null && videoPath != null)
                     {
                         displayWindow.DisplayImageAndVideo(imagePath, videoPath);
-                        PauseButton.Visibility = Visibility.Visible; // Mostra o botão de pausa para o vídeo
+                        SwapButton.Visibility = Visibility.Visible;
+                        PauseButton.Visibility = Visibility.Visible;
                     }
                     else
                     {

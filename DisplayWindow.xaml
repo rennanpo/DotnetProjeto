@@ -27,7 +27,7 @@
         <MediaElement Name="DisplayedVideo" Visibility="Collapsed"
               MediaEnded="DisplayedVideo_MediaEnded"
               LoadedBehavior="Manual" UnloadedBehavior="Stop"
-              Grid.Column="1"/>
+              Grid.Column="2"/>
         <WebBrowser Name="DisplayedBrowser" Visibility="Collapsed" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

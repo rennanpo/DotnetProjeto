@@ -1,144 +1,258 @@
 {
   "version": 3,
   "targets": {
-    "net9.0-windows7.0": {
-      "Aspose.Slides.NET/25.2.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Aspose.Slides.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Aspose.Slides.dll": {
-            "related": ".xml"
-          }
-        }
-      },
+    ".NETFramework,Version=v4.8": {
       "DocumentFormat.OpenXml/3.2.0": {
         "type": "package",
         "dependencies": {
           "DocumentFormat.OpenXml.Framework": "3.2.0"
         },
+        "frameworkAssemblies": [
+          "System",
+          "System.Xml",
+          "WindowsBase"
+        ],
         "compile": {
-          "lib/net8.0/DocumentFormat.OpenXml.dll": {
+          "lib/net46/DocumentFormat.OpenXml.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/DocumentFormat.OpenXml.dll": {
+          "lib/net46/DocumentFormat.OpenXml.dll": {
             "related": ".xml"
           }
         }
       },
       "DocumentFormat.OpenXml.Framework/3.2.0": {
         "type": "package",
-        "dependencies": {
-          "System.IO.Packaging": "8.0.1"
-        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Xml",
+          "WindowsBase"
+        ],
         "compile": {
-          "lib/net8.0/DocumentFormat.OpenXml.Framework.dll": {
+          "lib/net46/DocumentFormat.OpenXml.Framework.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/DocumentFormat.OpenXml.Framework.dll": {
+          "lib/net46/DocumentFormat.OpenXml.Framework.dll": {
             "related": ".xml"
           }
         }
       },
-      "Microsoft.Win32.SystemEvents/9.0.1": {
+      "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
         "type": "package",
         "compile": {
-          "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
-            "related": ".xml"
-          }
+          "lib/net20/Microsoft.Office.Interop.PowerPoint.dll": {}
         },
         "runtime": {
-          "lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.dll": {
-            "assetType": "runtime",
-            "rid": "win"
-          }
+          "lib/net20/Microsoft.Office.Interop.PowerPoint.dll": {}
         }
       },
-      "System.Drawing.Common/9.0.1": {
+      "MicrosoftOfficeCore/15.0.0": {
         "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.SystemEvents": "9.0.1"
-        },
         "compile": {
-          "lib/net9.0/System.Drawing.Common.dll": {
-            "related": ".pdb;.xml"
+          "lib/net35/Office.dll": {}
+        },
+        "runtime": {
+          "lib/net35/Office.dll": {}
+        }
+      },
+      "NetOffice.Core/1.7.4.11": {
+        "type": "package",
+        "compile": {
+          "lib/net45/NetOffice.dll": {
+            "related": ".xml"
           },
-          "lib/net9.0/System.Private.Windows.Core.dll": {
+          "lib/net45/OfficeApi.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/VBIDEApi.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net9.0/System.Drawing.Common.dll": {
-            "related": ".pdb;.xml"
+          "lib/net45/NetOffice.dll": {
+            "related": ".xml"
           },
-          "lib/net9.0/System.Private.Windows.Core.dll": {
+          "lib/net45/OfficeApi.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/VBIDEApi.dll": {
             "related": ".xml"
           }
-        },
-        "build": {
-          "buildTransitive/net8.0/_._": {}
         }
       },
-      "System.IO.Packaging/8.0.1": {
+      "NetOffice.PowerPoint/1.7.4.11": {
         "type": "package",
+        "dependencies": {
+          "NetOffice.Core": "1.7.4.11"
+        },
         "compile": {
-          "lib/net8.0/System.IO.Packaging.dll": {
+          "lib/net45/PowerPointApi.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/System.IO.Packaging.dll": {
+          "lib/net45/PowerPointApi.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "System.Drawing.Common/9.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net462/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
           }
         },
         "build": {
-          "buildTransitive/net6.0/_._": {}
+          "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Windows.Forms/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/System.Windows.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/System.Windows.Forms.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.8/win-x86": {
+      "DocumentFormat.OpenXml/3.2.0": {
+        "type": "package",
+        "dependencies": {
+          "DocumentFormat.OpenXml.Framework": "3.2.0"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Xml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net46/DocumentFormat.OpenXml.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net46/DocumentFormat.OpenXml.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "DocumentFormat.OpenXml.Framework/3.2.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Xml",
+          "WindowsBase"
+        ],
+        "compile": {
+          "lib/net46/DocumentFormat.OpenXml.Framework.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net46/DocumentFormat.OpenXml.Framework.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+        "type": "package",
+        "compile": {
+          "lib/net20/Microsoft.Office.Interop.PowerPoint.dll": {}
+        },
+        "runtime": {
+          "lib/net20/Microsoft.Office.Interop.PowerPoint.dll": {}
+        }
+      },
+      "MicrosoftOfficeCore/15.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Office.dll": {}
+        },
+        "runtime": {
+          "lib/net35/Office.dll": {}
+        }
+      },
+      "NetOffice.Core/1.7.4.11": {
+        "type": "package",
+        "compile": {
+          "lib/net45/NetOffice.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/OfficeApi.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/VBIDEApi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/NetOffice.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/OfficeApi.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/VBIDEApi.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "NetOffice.PowerPoint/1.7.4.11": {
+        "type": "package",
+        "dependencies": {
+          "NetOffice.Core": "1.7.4.11"
+        },
+        "compile": {
+          "lib/net45/PowerPointApi.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/PowerPointApi.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Drawing.Common/9.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net462/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Drawing.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
+        }
+      },
+      "System.Windows.Forms/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/System.Windows.Forms.dll": {}
+        },
+        "runtime": {
+          "lib/System.Windows.Forms.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "Aspose.Slides.NET/25.2.0": {
-      "sha512": "NzKEnE16mf6VToD2DyY59AAK0vOWpBjwR7nuY96a2rlAxytCpcgvtAjsRX0pQAPExBJppT4x/RwB/LeZ1ldBOw==",
-      "type": "package",
-      "path": "aspose.slides.net/25.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Aspose_End-User-License-Agreement.md",
-        "Help/Aspose.Slides.chm",
-        "aspose.slides.net.25.2.0.nupkg.sha512",
-        "aspose.slides.net.nuspec",
-        "aspose_slides-for-net-min.png",
-        "lib/net2.0/Aspose.Slides.dll",
-        "lib/net2.0/Aspose.Slides.xml",
-        "lib/net4.0-client/Aspose.Slides.dll",
-        "lib/net4.0-client/Aspose.Slides.xml",
-        "lib/net6.0/Aspose.Slides.dll",
-        "lib/net6.0/Aspose.Slides.xml",
-        "lib/netstandard2.0/Aspose.Slides.dll",
-        "lib/netstandard2.0/Aspose.Slides.xml",
-        "thirdpartylicenses.Aspose.Slides.for.NET.pdf"
-      ]
-    },
     "DocumentFormat.OpenXml/3.2.0": {
       "sha512": "eDBT9G0sAWUvjgE8l8E5bGCFXgxCZXIecQ8dqUnj2PyxyMR5eBmLahqRRw3Q7uSKM3cKbysaL2mEY0JJbEEOEA==",
       "type": "package",
@@ -187,42 +301,101 @@
         "lib/netstandard2.0/DocumentFormat.OpenXml.Framework.xml"
       ]
     },
-    "Microsoft.Win32.SystemEvents/9.0.1": {
-      "sha512": "OxjcwJqBW/5A1111+vL9d+5KYTvOzeCTJY9zHZ0kpQI4wX075p6L7inHPSYuf0MGakVjUvaShvw9e9pfbInU2Q==",
+    "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+      "sha512": "3XkJAqbYq93MqqSOPusNE+6Tve5yBkbE92n9W8f+k8Z9AzXeoTMqMYqhZMrzVOp4saHhMMbOD78JkCjvk+qIzw==",
       "type": "package",
-      "path": "microsoft.win32.systemevents/9.0.1",
+      "path": "microsoft.office.interop.powerpoint/15.0.4420.1018",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "PACKAGE.md",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/Microsoft.Win32.SystemEvents.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net8.0/_._",
-        "buildTransitive/netcoreapp2.0/Microsoft.Win32.SystemEvents.targets",
-        "lib/net462/Microsoft.Win32.SystemEvents.dll",
-        "lib/net462/Microsoft.Win32.SystemEvents.xml",
-        "lib/net8.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/net8.0/Microsoft.Win32.SystemEvents.xml",
-        "lib/net9.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/net9.0/Microsoft.Win32.SystemEvents.xml",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
-        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
-        "microsoft.win32.systemevents.9.0.1.nupkg.sha512",
-        "microsoft.win32.systemevents.nuspec",
-        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/net8.0/Microsoft.Win32.SystemEvents.xml",
-        "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.dll",
-        "runtimes/win/lib/net9.0/Microsoft.Win32.SystemEvents.xml",
-        "useSharedDesignerContext.txt"
+        "lib/net20/Microsoft.Office.Interop.PowerPoint.dll",
+        "lib/netstandard2.0/Microsoft.Office.Interop.PowerPoint.dll",
+        "microsoft.office.interop.powerpoint.15.0.4420.1018.nupkg.sha512",
+        "microsoft.office.interop.powerpoint.nuspec"
       ]
     },
-    "System.Drawing.Common/9.0.1": {
-      "sha512": "TTPkCqSMyMaG8BXlBKYTTJFtLV0SvjjsvgUN598hYgHaX/5B7tdUc2JhQF9vwrYmlzxId+gwFnKYuxQ2XsSz2g==",
+    "MicrosoftOfficeCore/15.0.0": {
+      "sha512": "/KgYw8uvv0Ut8FPvyEa1XJ/TrLSRgvTv3JgC2IT0/8NwoICzbEJWfmfwsE6Dwi8WH0jVkTEO7zRvGvaKqUOhqQ==",
       "type": "package",
-      "path": "system.drawing.common/9.0.1",
+      "path": "microsoftofficecore/15.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Office.dll",
+        "microsoftofficecore.15.0.0.nupkg.sha512",
+        "microsoftofficecore.nuspec"
+      ]
+    },
+    "NetOffice.Core/1.7.4.11": {
+      "sha512": "voWeYFBjBET6y0kugZ7LUCJHBtT/ox/JFEscRdyqDXyooVdY246d19wVMr1ftXXD+30k5ZiClIGZbpOxHLFp0A==",
+      "type": "package",
+      "path": "netoffice.core/1.7.4.11",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/NetOffice.dll",
+        "lib/net20/NetOffice.xml",
+        "lib/net20/OfficeApi.dll",
+        "lib/net20/OfficeApi.xml",
+        "lib/net20/VBIDEApi.dll",
+        "lib/net20/VBIDEApi.xml",
+        "lib/net30/NetOffice.dll",
+        "lib/net30/NetOffice.xml",
+        "lib/net30/OfficeApi.dll",
+        "lib/net30/OfficeApi.xml",
+        "lib/net30/VBIDEApi.dll",
+        "lib/net30/VBIDEApi.xml",
+        "lib/net35/NetOffice.dll",
+        "lib/net35/NetOffice.xml",
+        "lib/net35/OfficeApi.dll",
+        "lib/net35/OfficeApi.xml",
+        "lib/net35/VBIDEApi.dll",
+        "lib/net35/VBIDEApi.xml",
+        "lib/net40/NetOffice.dll",
+        "lib/net40/NetOffice.xml",
+        "lib/net40/OfficeApi.dll",
+        "lib/net40/OfficeApi.xml",
+        "lib/net40/VBIDEApi.dll",
+        "lib/net40/VBIDEApi.xml",
+        "lib/net45/NetOffice.dll",
+        "lib/net45/NetOffice.xml",
+        "lib/net45/OfficeApi.dll",
+        "lib/net45/OfficeApi.xml",
+        "lib/net45/VBIDEApi.dll",
+        "lib/net45/VBIDEApi.xml",
+        "netoffice.core.1.7.4.11.nupkg.sha512",
+        "netoffice.core.nuspec",
+        "tools/install.ps1"
+      ]
+    },
+    "NetOffice.PowerPoint/1.7.4.11": {
+      "sha512": "xWHk5ECpV/CLtlPAwII6WRvMi7qHU8GB63EsvUqAHatokBQWOQD17//GL/eXWmexLzCVTa76rYvvdUZsk1eCpA==",
+      "type": "package",
+      "path": "netoffice.powerpoint/1.7.4.11",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/PowerPointApi.dll",
+        "lib/net20/PowerPointApi.xml",
+        "lib/net30/PowerPointApi.dll",
+        "lib/net30/PowerPointApi.xml",
+        "lib/net35/PowerPointApi.dll",
+        "lib/net35/PowerPointApi.xml",
+        "lib/net40/PowerPointApi.dll",
+        "lib/net40/PowerPointApi.xml",
+        "lib/net45/PowerPointApi.dll",
+        "lib/net45/PowerPointApi.xml",
+        "netoffice.powerpoint.1.7.4.11.nupkg.sha512",
+        "netoffice.powerpoint.nuspec",
+        "tools/install.ps1"
+      ]
+    },
+    "System.Drawing.Common/9.0.2": {
+      "sha512": "JU947wzf8JbBS16Y5EIZzAlyQU+k68D7LRx6y03s2wlhlvLqkt/8uPBrjv2hJnnaJKbdb0GhQ3JZsfYXhrRjyg==",
+      "type": "package",
+      "path": "system.drawing.common/9.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -256,72 +429,66 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "system.drawing.common.9.0.1.nupkg.sha512",
+        "system.drawing.common.9.0.2.nupkg.sha512",
         "system.drawing.common.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.IO.Packaging/8.0.1": {
-      "sha512": "KYkIOAvPexQOLDxPO2g0BVoWInnQhPpkFzRqvNrNrMhVT6kqhVr0zEb6KCHlptLFukxnZrjuMVAnxK7pOGUYrw==",
+    "System.Windows.Forms/4.0.0": {
+      "sha512": "WL3QPG1q88aIWO0JPOlkCeyNE+FK4ufSKY5j6J6qAFQyfCFiiOYxi8RAhev9H0CS/wmKbIK8qr8xZBod85oWKw==",
       "type": "package",
-      "path": "system.io.packaging/8.0.1",
+      "path": "system.windows.forms/4.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/System.IO.Packaging.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net6.0/_._",
-        "buildTransitive/netcoreapp2.0/System.IO.Packaging.targets",
-        "lib/net462/System.IO.Packaging.dll",
-        "lib/net462/System.IO.Packaging.xml",
-        "lib/net6.0/System.IO.Packaging.dll",
-        "lib/net6.0/System.IO.Packaging.xml",
-        "lib/net7.0/System.IO.Packaging.dll",
-        "lib/net7.0/System.IO.Packaging.xml",
-        "lib/net8.0/System.IO.Packaging.dll",
-        "lib/net8.0/System.IO.Packaging.xml",
-        "lib/netstandard2.0/System.IO.Packaging.dll",
-        "lib/netstandard2.0/System.IO.Packaging.xml",
-        "system.io.packaging.8.0.1.nupkg.sha512",
-        "system.io.packaging.nuspec",
-        "useSharedDesignerContext.txt"
+        "lib/System.Windows.Forms.dll",
+        "system.windows.forms.4.0.0.nupkg.sha512",
+        "system.windows.forms.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
-    "net9.0-windows7.0": [
-      "Aspose.Slides.NET >= 25.2.0",
+    ".NETFramework,Version=v4.8": [
       "DocumentFormat.OpenXml >= 3.2.0",
-      "System.Drawing.Common >= 9.0.1"
+      "Microsoft.Office.Interop.PowerPoint >= 15.0.4420.1018",
+      "MicrosoftOfficeCore >= 15.0.0",
+      "NetOffice.Core >= 1.7.4.11",
+      "NetOffice.PowerPoint >= 1.7.4.11",
+      "System.Drawing.Common >= 9.0.2",
+      "System.Windows.Forms >= 4.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rpontes\\.nuget\\packages\\": {}
+    "C:\\Users\\rpontes\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rpontes\\Documents\\ThiagoDotnet\\MultiScreenApp\\MultiScreenApp.csproj",
+      "projectUniqueName": "C:\\Users\\rpontes\\Documents\\DotnetProjeto\\MultiScreenApp.csproj",
       "projectName": "MultiScreenApp",
-      "projectPath": "C:\\Users\\rpontes\\Documents\\ThiagoDotnet\\MultiScreenApp\\MultiScreenApp.csproj",
+      "projectPath": "C:\\Users\\rpontes\\Documents\\DotnetProjeto\\MultiScreenApp.csproj",
       "packagesPath": "C:\\Users\\rpontes\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rpontes\\Documents\\ThiagoDotnet\\MultiScreenApp\\obj\\",
+      "outputPath": "C:\\Users\\rpontes\\Documents\\DotnetProjeto\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\rpontes\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\rpontes\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net9.0-windows"
+        "net48"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net9.0-windows7.0": {
-          "targetAlias": "net9.0-windows",
+        "net48": {
+          "targetAlias": "net48",
           "projectReferences": {}
         }
       },
@@ -335,45 +502,47 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
-      "net9.0-windows7.0": {
-        "targetAlias": "net9.0-windows",
+      "net48": {
+        "targetAlias": "net48",
         "dependencies": {
-          "Aspose.Slides.NET": {
-            "target": "Package",
-            "version": "[25.2.0, )"
-          },
           "DocumentFormat.OpenXml": {
             "target": "Package",
             "version": "[3.2.0, )"
           },
+          "Microsoft.Office.Interop.PowerPoint": {
+            "target": "Package",
+            "version": "[15.0.4420.1018, )"
+          },
+          "MicrosoftOfficeCore": {
+            "target": "Package",
+            "version": "[15.0.0, )"
+          },
+          "NetOffice.Core": {
+            "target": "Package",
+            "version": "[1.7.4.11, )"
+          },
+          "NetOffice.PowerPoint": {
+            "target": "Package",
+            "version": "[1.7.4.11, )"
+          },
           "System.Drawing.Common": {
             "target": "Package",
-            "version": "[9.0.1, )"
-          }
-        },
-        "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48",
-          "net481"
-        ],
-        "assetTargetFallback": true,
-        "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
+            "version": "[9.0.2, )"
           },
-          "Microsoft.WindowsDesktop.App.WPF": {
-            "privateAssets": "none"
+          "System.Windows.Forms": {
+            "target": "Package",
+            "version": "[4.0.0, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x86": {
+        "#import": []
       }
     }
   }
