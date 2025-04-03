@@ -86,6 +86,16 @@ namespace MultiScreenApp
 
         public void DisplayImages(string filePath1, string filePath2)
         {
+            // Troca os elementos de coluna
+            if (DisplayedVideo.Visibility == Visibility.Visible)
+            {
+                int imageColumn = Grid.GetColumn(DisplayedImage1);
+                int videoColumn = Grid.GetColumn(DisplayedVideo);
+
+                // Troca os elementos de coluna
+                Grid.SetColumn(DisplayedImage1, videoColumn);
+                Grid.SetColumn(DisplayedVideo, imageColumn);
+            }
             DisplayedVideo.Visibility = Visibility.Collapsed;
             DisplayedImage1.Source = new BitmapImage(new Uri(filePath1));
             DisplayedImage1.Visibility = Visibility.Visible;
